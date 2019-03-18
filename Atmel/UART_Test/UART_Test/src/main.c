@@ -36,9 +36,12 @@
 #define BUTTSTART_PIO_ID        ID_PIOC
 #define BUTTSTART_PIO_IDX       17u
 #define BUTTSTART_PIO_IDX_MASK  (1u << BUTTSTART_PIO_IDX)
+volatile Bool but_flag;
 
 // Descomente o define abaixo, para desabilitar o Bluetooth e utilizar modo Serial via Cabo
 //#define DEBUG_SERIAL
+
+
 
 
 #ifdef DEBUG_SERIAL
@@ -123,6 +126,45 @@ int hc05_server_init(void) {
 	usart_log("hc05_server_init", buffer_rx);
 }
 
+void but_callback(void)
+{
+	but_flag = true;
+}
+
+void io_init(void)
+{
+
+	// Configura led
+	//pmc_enable_periph_clk(LED_PIO_ID);
+	//pio_configure(LED_PIO, PIO_OUTPUT_0, LED_IDX_MASK, PIO_DEFAULT);
+
+	// Inicializa clock do periférico PIO responsavel pelo botao
+	pmc_enable_periph_clk(BUTTSTART_PIO_ID);
+
+	// Configura PIO para lidar com o pino do botão como entrada
+	// com pull-up
+	pio_configure(BUTTSTART_PIO, PIO_INPUT, BUTTSTART_PIO_IDX_MASK, PIO_PULLUP);
+
+	// Configura interrupção no pino referente ao botao e associa
+	// função de callback caso uma interrupção for gerada
+	// a função de callback é a: but_callback()
+	pio_handler_set(BUTTSTART_PIO,
+	BUTTSTART_PIO_ID,
+	BUTTSTART_PIO_IDX_MASK,
+	PIO_IT_FALL_EDGE,
+	but_callback);
+
+	// Ativa interrupção
+	pio_enable_interrupt(BUTTSTART_PIO, BUTTSTART_PIO_IDX_MASK);
+
+	// Configura NVIC para receber interrupcoes do PIO do botao
+	// com prioridade 4 (quanto mais próximo de 0 maior)
+	NVIC_EnableIRQ(BUTTSTART_PIO_ID);
+	NVIC_SetPriority(BUTTSTART_PIO_ID, 4); // Prioridade 4
+}
+
+
+
 
 int main (void)
 {
@@ -142,25 +184,23 @@ int main (void)
 	char button1 = '0';
 	char eof = 'X';
 	char buffer[1024];
-	
-	pmc_enable_periph_clk(BUTTSTART_PIO_ID);
-	// configura pino ligado ao bot?o como entrada com um pull-up.
-	pio_set_input(BUTTSTART_PIO,BUTTSTART_PIO_IDX_MASK,PIO_DEFAULT);
-	// ativa pullup
-	pio_pull_up(BUTTSTART_PIO, BUTTSTART_PIO_IDX_MASK, 1);
+	io_init();
 	
 	while(1) {
-		if(pio_get(BUTTSTART_PIO,PIO_INPUT,BUTTSTART_PIO_IDX_MASK) == 0) {
+		
+		
+		if(but_flag) {
 			button1 = '1';
+				while(!usart_is_tx_ready(UART_COMM));
+				usart_write(UART_COMM, '1');
+				while(!usart_is_tx_ready(UART_COMM));
+				usart_write(UART_COMM, eof);
+			
+			but_flag = false;
 		} else {
 			button1 = '0';
 		}
 		
-		while(!usart_is_tx_ready(UART_COMM));
-		usart_write(UART_COMM, button1);
-		while(!usart_is_tx_ready(UART_COMM));
-		usart_write(UART_COMM, eof);
-				delay_ms(250);
-
+	
 	}
 }
