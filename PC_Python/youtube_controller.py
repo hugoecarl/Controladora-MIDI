@@ -3,6 +3,8 @@ import serial
 import argparse
 import time
 import logging
+import pygame
+pygame.mixer.init()
 
 class MyControllerMap:
     def __init__(self):
@@ -30,10 +32,10 @@ class SerialControllerInterface:
 
         if data == b'1':
             logging.info("KEYDOWN A")
-            pyautogui.keyDown(self.mapping.button['A'])
+            pygame.mixer.music.load("eoq.ogg")
+			pygame.mixer.music.play()
         elif data == b'0':
             logging.info("KEYUP A")
-            pyautogui.keyUp(self.mapping.button['A'])
 
         self.incoming = self.ser.read()
 
