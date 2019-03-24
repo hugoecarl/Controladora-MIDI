@@ -6,14 +6,11 @@ import logging
 import pygame
 pygame.mixer.init()
 
-class MyControllerMap:
-    def __init__(self):
-        self.button = {'A': 'L'} # Fast forward (10 seg) pro Youtube
 
 class SerialControllerInterface:
-    # Protocolo
-    # byte 1 -> Botão 1 (estado - Apertado 1 ou não 0)
-    # byte 2 -> EOP - End of Packet -> valor reservado 'X'
+    #Protocolo
+    #byte 1 -> Botão 1 (estado - Apertado 1 ou não 0)
+    #byte 2 -> EOP - End of Packet -> valor reservado 'X'
 
     def __init__(self, port, baudrate):
         self.ser = serial.Serial(port, baudrate=baudrate)
@@ -31,12 +28,16 @@ class SerialControllerInterface:
         logging.debug("Received DATA: {}".format(data))
 
         if data == b'1':
-            logging.info("KEYDOWN A")
-            pygame.mixer.music.load("eoq.ogg")
-			pygame.mixer.music.play()
-        elif data == b'0':
-            logging.info("KEYUP A")
-
+            pygame.mixer.music.load("Kick.wav")
+            pygame.mixer.music.play()
+        elif data == b'2':
+            pygame.mixer.music.load("clap.wav")
+            pygame.mixer.music.play()
+        elif data == b'3':
+            pygame.mixer.music.load("snareo.wav")
+            pygame.mixer.music.play()
+            
+            
         self.incoming = self.ser.read()
 
 
