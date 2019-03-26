@@ -31,43 +31,30 @@
 #include <asf.h>
 #include <string.h>
 
-// defines do Botao de start
-#define BUTTSTART_PIO           PIOC
-#define BUTTSTART_PIO_ID        ID_PIOC
-#define BUTTSTART_PIO_IDX       17u
-#define BUTTSTART_PIO_IDX_MASK  (1u << BUTTSTART_PIO_IDX)
-
-#define BUTTSTART1_PIO           PIOC
-#define BUTTSTART1_PIO_ID        ID_PIOC
-#define BUTTSTART1_PIO_IDX       30u
-#define BUTTSTART1_PIO_IDX_MASK  (1u << BUTTSTART1_PIO_IDX)
-
-#define BUTTSTART2_PIO           PIOA
-#define BUTTSTART2_PIO_ID        ID_PIOA
-#define BUTTSTART2_PIO_IDX       3u
-#define BUTTSTART2_PIO_IDX_MASK  (1u << BUTTSTART2_PIO_IDX)
-
 #define APERTADO '1'
 #define LIBERADO '0'
 
-#define BUT_ID '1'
-#define BUT1_ID '2'
-#define BUT2_ID '3'
-#define BUT3_ID '4'
-#define BUT4_ID '5'
-#define BUT5_ID '6'
+volatile Bool but_status;
+
+typedef void (*p_handler) (uint32_t, uint32_t);
+
+//Define e inicia struct para botoes
+
+typedef struct {
+	uint32_t PIO_NAME;
+	uint32_t PIO_ID;
+	uint32_t PIO_IDX;
+	uint32_t PIO_MASK;
+	volatile Bool but_flag;
+	char BUT_NUM;
+} botao;
+
+botao BUT1 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 17u, .PIO_MASK = (1u << 17u), .BUT_NUM = '1'};
+botao BUT2 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 30u, .PIO_MASK = (1u << 30u), .BUT_NUM = '2'};
+botao BUT3 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = '3'};
 
 // Descomente o define abaixo, para desabilitar o Bluetooth e utilizar modo Serial via Cabo
 //#define DEBUG_SERIAL
-
-volatile Bool but_status;
-volatile Bool but_flag;
-volatile Bool but1_flag;
-volatile Bool but2_flag;
-volatile Bool but3_flag;
-volatile Bool but4_flag;
-
-
 #ifdef DEBUG_SERIAL
 #define UART_COMM USART1
 #else
@@ -76,28 +63,28 @@ volatile Bool but4_flag;
 
 volatile long g_systimer = 0;
 
-void but_callback(void)
+void but1_callback(void)
 {
-	but_flag = true;
-	if(!pio_get(BUTTSTART_PIO, PIO_INPUT, BUTTSTART_PIO_IDX_MASK))
+	BUT1.but_flag = true;
+	if(!pio_get(BUT1.PIO_NAME, PIO_INPUT, BUT1.PIO_MASK))
 		but_status = APERTADO;
 	else 
 		but_status = LIBERADO;
 }
 
-void but1_callback(void)
+void but2_callback(void)
 {
-	but1_flag = true;
-	if(!pio_get(BUTTSTART1_PIO, PIO_INPUT, BUTTSTART1_PIO_IDX_MASK))
+	BUT2.but_flag = true;
+	if(!pio_get(BUT2.PIO_NAME, PIO_INPUT, BUT2.PIO_MASK))
 	but_status = APERTADO;
 	else
 	but_status = LIBERADO;
 }
 
-void but2_callback(void)
+void but3_callback(void)
 {
-	but2_flag = true;
-	if(!pio_get(BUTTSTART2_PIO, PIO_INPUT, BUTTSTART2_PIO_IDX_MASK))
+	BUT3.but_flag = true;
+	if(!pio_get(BUT3.PIO_NAME, PIO_INPUT, BUT3.PIO_MASK))
 	but_status = APERTADO;
 	else
 	but_status = LIBERADO;
@@ -179,85 +166,48 @@ int hc05_server_init(void) {
 
 
 
-void send_command(int botao, int estado){
+void send_command(int nbotao, int estado){
 	char eof = 'X';
 	while(!usart_is_tx_ready(UART_COMM));
-	usart_write(UART_COMM, botao);
+	usart_write(UART_COMM, nbotao);
 	while(!usart_is_tx_ready(UART_COMM));
 	usart_write(UART_COMM, eof);
-	delay_ms(200);
+}
+
+//Funcao que inicializa os botoes e a interrupcao gerada por eles
+void iniciabots(botao BOT, p_handler *funcao){		
+			
+	pio_configure(BOT.PIO_NAME, PIO_INPUT, BOT.PIO_MASK, PIO_PULLUP|PIO_DEBOUNCE);
+	pio_set_debounce_filter(BOT.PIO_NAME, BOT.PIO_MASK, 60);
+
+	// Configura interrupção no pino referente ao botao e associa
+	// função de callback caso uma interrupção for gerada
+	// a função de callback é a: but_callback()
+	pio_handler_set(BOT.PIO_NAME,
+	BOT.PIO_ID,
+	BOT.PIO_MASK,
+	PIO_IT_FALL_EDGE,
+	funcao);
+
+	// Ativa interrupção
+	pio_enable_interrupt(BOT.PIO_NAME, BOT.PIO_MASK);
+
+	// Configura NVIC para receber interrupcoes do PIO do botao
+	// com prioridade 4 (quanto mais próximo de 0 maior)
+	NVIC_EnableIRQ(BOT.PIO_ID);
+	NVIC_SetPriority(BOT.PIO_ID, 4); // Prioridade 4	
+
 }
 
 
 void io_init(void)
 {
-
-	// Configura led
-	//pmc_enable_periph_clk(LED_PIO_ID);
-	//pio_configure(LED_PIO, PIO_OUTPUT_0, LED_IDX_MASK, PIO_DEFAULT);
-
-	// Inicializa clock do periférico PIO responsavel pelo botao
-	pmc_enable_periph_clk(BUTTSTART_PIO_ID);
-
-	// Configura PIO para lidar com o pino do botão como entrada
-	// com pull-up
-	pio_configure(BUTTSTART_PIO, PIO_INPUT, BUTTSTART_PIO_IDX_MASK, PIO_PULLUP);
-
-	// Configura interrupção no pino referente ao botao e associa
-	// função de callback caso uma interrupção for gerada
-	// a função de callback é a: but_callback()
-	pio_handler_set(BUTTSTART_PIO,
-	BUTTSTART_PIO_ID,
-	BUTTSTART_PIO_IDX_MASK,
-	PIO_IT_FALL_EDGE,
-	but_callback);
-
-	// Ativa interrupção
-	pio_enable_interrupt(BUTTSTART_PIO, BUTTSTART_PIO_IDX_MASK);
-
-	// Configura NVIC para receber interrupcoes do PIO do botao
-	// com prioridade 4 (quanto mais próximo de 0 maior)
-	NVIC_EnableIRQ(BUTTSTART_PIO_ID);
-	NVIC_SetPriority(BUTTSTART_PIO_ID, 4); // Prioridade 4
-	//---------------------------------------------------------------------------------------------------------------
-	// Configura interrupção no pino referente ao botao e associa
-	// função de callback caso uma interrupção for gerada
-	// a função de callback é a: but_callback()
-	pio_handler_set(BUTTSTART1_PIO,
-	BUTTSTART1_PIO_ID,
-	BUTTSTART1_PIO_IDX_MASK,
-	PIO_IT_FALL_EDGE,
-	but1_callback);
-
-	// Ativa interrupção
-	pio_enable_interrupt(BUTTSTART1_PIO, BUTTSTART1_PIO_IDX_MASK);
-
-	// Configura NVIC para receber interrupcoes do PIO do botao
-	// com prioridade 4 (quanto mais próximo de 0 maior)
-	NVIC_EnableIRQ(BUTTSTART1_PIO_ID);
-	NVIC_SetPriority(BUTTSTART1_PIO_ID, 4); // Prioridade 4
-	//----------------------------------------------------------------------------------------------------------------
-	// Configura interrupção no pino referente ao botao e associa
-	// função de callback caso uma interrupção for gerada
-	// a função de callback é a: but_callback()
-	pio_handler_set(BUTTSTART2_PIO,
-		BUTTSTART2_PIO_ID,
-		BUTTSTART2_PIO_IDX_MASK,
-		PIO_IT_FALL_EDGE,
-		but2_callback);
-
-	// Ativa interrupção
-	pio_enable_interrupt(BUTTSTART2_PIO, BUTTSTART2_PIO_IDX_MASK);
-
-	// Configura NVIC para receber interrupcoes do PIO do botao
-	// com prioridade 4 (quanto mais próximo de 0 maior)
-	NVIC_EnableIRQ(BUTTSTART2_PIO_ID);
-	NVIC_SetPriority(BUTTSTART2_PIO_ID, 4); // Prioridade 4
-
+	
+	iniciabots(BUT1, but1_callback);
+	iniciabots(BUT2, but2_callback);
+	iniciabots(BUT3, but3_callback);
 
 }
-
-
 
 
 int main (void)
@@ -278,17 +228,17 @@ int main (void)
 	io_init();
 	
 	while(1) {	
-		if(but_flag) {
-			send_command(BUT_ID, but_status);			
-			but_flag = false;
+		if(BUT1.but_flag) {
+			send_command(BUT1.BUT_NUM, but_status);			
+			BUT1.but_flag = false;
 		}
-		if(but1_flag) {
-			send_command(BUT1_ID, but_status);
-			but1_flag = false;
+		if(BUT2.but_flag) {
+			send_command(BUT2.BUT_NUM, but_status);
+			BUT2.but_flag = false;
 		}
-		if(but2_flag) {
-			send_command(BUT2_ID, but_status);
-			but2_flag = false;
+		if(BUT3.but_flag) {
+			send_command(BUT3.BUT_NUM, but_status);
+			BUT3.but_flag = false;
 		}
 	}
 }

@@ -6,6 +6,9 @@ import logging
 import pygame
 pygame.mixer.init()
 
+class MyControllerMap:
+    def __init__(self):
+        self.button = {'A': 'L'} # Fast forward (10 seg) pro Youtube
 
 class SerialControllerInterface:
     #Protocolo
