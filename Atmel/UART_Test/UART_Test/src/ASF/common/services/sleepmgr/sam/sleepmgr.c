@@ -1,9 +1,9 @@
 /**
  * \file
  *
- * \brief SAME70 Xplained board configuration
+ * \brief SAM3/SAM4 Sleep manager implementation.
  *
- * Copyright (c) 2015-2018 Microchip Technology Inc. and its subsidiaries.
+ * Copyright (c) 2012-2018 Microchip Technology Inc. and its subsidiaries.
  *
  * \asf_license_start
  *
@@ -28,17 +28,17 @@
  * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  *
  * \asf_license_stop
+ *
  */
 /*
  * Support and FAQ: visit <a href="https://www.microchip.com/support/">Microchip Support</a>
  */
 
-#ifndef CONF_BOARD_H
-#define CONF_BOARD_H
+#include <compiler.h>
+#include <sleepmgr.h>
 
-/* Enable ICache and DCache */
-#define CONF_BOARD_ENABLE_CACHE
+#if defined(CONFIG_SLEEPMGR_ENABLE) || defined(__DOXYGEN__)
 
-#define CONF_BOARD_UART_CONSOLE
+uint8_t sleepmgr_locks[SLEEPMGR_NR_OF_MODES];
 
-#endif /* CONF_BOARD_H */
+#endif /* CONFIG_SLEEPMGR_ENABLE */
