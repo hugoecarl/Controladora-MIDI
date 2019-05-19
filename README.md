@@ -4,15 +4,13 @@
     - RTOS
     - LEDs 
     - Feedback
-    - Buzzer
-    - Fita LED RGB
+    - 2x buzzer
     - Caixa
     
 - B (2 itens)
 - A (+1 itens)
-    
+   - Fita LED RGB  
    - Gravar sequencia
    - Buzzer pra speaker
    - MIDI 
-   - Integrar tudo na caixa
    - LCD
