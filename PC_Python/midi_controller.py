@@ -55,6 +55,33 @@ class SerialControllerInterface:
         elif data == b'c':
             pygame.mixer.music.load("snareo.wav")
             pygame.mixer.music.play()
+        elif data == b'd':
+            pygame.mixer.music.load("Clap_SP_03.wav")
+            pygame.mixer.music.play()
+        elif data == b'e':
+            pygame.mixer.music.load("clymb1.wav")
+            pygame.mixer.music.play()
+        elif data == b'f':
+            pygame.mixer.music.load("F#_Bass_SP_08.wav")
+            pygame.mixer.music.play()
+        elif data == b'g':
+            pygame.mixer.music.load("Gritty_SP_11.wav")
+            pygame.mixer.music.play()
+        elif data == b'h':
+            pygame.mixer.music.load("HatO_SP_08.wav")
+            pygame.mixer.music.play()
+        elif data == b'i':
+            pygame.mixer.music.load("Kick_SP_15.wav")
+            pygame.mixer.music.play()
+        elif data == b'j':
+            pygame.mixer.music.load("KickAtt_SP_08.wav")
+            pygame.mixer.music.play()
+        elif data == b'k':
+            pygame.mixer.music.load("PercHi_SP_05.wav")
+            pygame.mixer.music.play()
+        elif data == b'l':
+            pygame.mixer.music.load("PercLo_SP_21.wav")
+            pygame.mixer.music.play()
 
         
         devices = AudioUtilities.GetSpeakers()
@@ -74,7 +101,7 @@ class SerialControllerInterface:
             if num > (i-1)*40.95 and num < (i * 40.95): 
                 self.vol = i
                 volume.SetMasterVolumeLevelScalar((float(i)/100), None)
-                if num <= 32:
+                if num < 35:
                     self.vol = 0
                     volume.SetMasterVolumeLevelScalar(0.0, None)
 

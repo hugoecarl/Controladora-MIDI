@@ -37,17 +37,76 @@
 #define LIBERADO '0'
 
 
-#define EBUT1_PIO PIOA //start EXT 9 PD28
-#define EBUT1_PIO_ID ID_PIOA
-#define EBUT1_PIO_IDX 3
-#define EBUT1_PIO_IDX_MASK (1u << EBUT1_PIO_IDX)
-
-#define EBUT2_PIO PIOA //pause  Ext 4 PA19 PA = 10
-#define EBUT2_PIO_ID ID_PIOA
-#define EBUT2_PIO_IDX 4
+#define EBUT2_PIO PIOD //start EXT 9 PD28
+#define EBUT2_PIO_ID ID_PIOD
+#define EBUT2_PIO_IDX 16
 #define EBUT2_PIO_IDX_MASK (1u << EBUT2_PIO_IDX)
 
+#define EBUT1_PIO PIOC //pause  Ext 4 PA19 PA = 10
+#define EBUT1_PIO_ID ID_PIOC
+#define EBUT1_PIO_IDX 9
+#define EBUT1_PIO_IDX_MASK (1u << EBUT1_PIO_IDX)
 
+#define LED1_PIO PIOD
+#define LED1_PIO_ID ID_PIOD
+#define LED1_PIO_IDX 30
+#define LED1_PIO_IDX_MASK (1u << LED1_PIO_IDX)
+
+#define LED2_PIO PIOC
+#define LED2_PIO_ID ID_PIOC
+#define LED2_PIO_IDX 19
+#define LED2_PIO_IDX_MASK (1u << LED2_PIO_IDX)
+
+#define LED3_PIO PIOD
+#define LED3_PIO_ID ID_PIOD
+#define LED3_PIO_IDX 11
+#define LED3_PIO_IDX_MASK (1u << LED3_PIO_IDX)
+
+#define LED4_PIO PIOC
+#define LED4_PIO_ID ID_PIOC
+#define LED4_PIO_IDX 13
+#define LED4_PIO_IDX_MASK (1u << LED4_PIO_IDX)
+
+#define LED5_PIO PIOD
+#define LED5_PIO_ID ID_PIOD
+#define LED5_PIO_IDX 26
+#define LED5_PIO_IDX_MASK (1u << LED5_PIO_IDX)
+
+#define LED6_PIO PIOA
+#define LED6_PIO_ID ID_PIOA
+#define LED6_PIO_IDX 21
+#define LED6_PIO_IDX_MASK (1u << LED6_PIO_IDX)
+
+#define LED7_PIO PIOA
+#define LED7_PIO_ID ID_PIOA
+#define LED7_PIO_IDX 6
+#define LED7_PIO_IDX_MASK (1u << LED7_PIO_IDX)
+
+#define LED8_PIO PIOA
+#define LED8_PIO_ID ID_PIOA
+#define LED8_PIO_IDX 24
+#define LED8_PIO_IDX_MASK (1u << LED8_PIO_IDX)
+
+#define LED9_PIO PIOB
+#define LED9_PIO_ID ID_PIOB
+#define LED9_PIO_IDX 4
+#define LED9_PIO_IDX_MASK (1u << LED9_PIO_IDX)
+
+#define LED10_PIO PIOA
+#define LED10_PIO_ID ID_PIOA
+#define LED10_PIO_IDX 26
+#define LED10_PIO_IDX_MASK (1u << LED10_PIO_IDX)
+
+
+#define LED11_PIO PIOA
+#define LED11_PIO_ID ID_PIOA
+#define LED11_PIO_IDX 2
+#define LED11_PIO_IDX_MASK (1u << LED11_PIO_IDX)
+
+#define LED12_PIO PIOD
+#define LED12_PIO_ID ID_PIOD
+#define LED12_PIO_IDX 27
+#define LED12_PIO_IDX_MASK (1u << LED12_PIO_IDX)
 
 /** UART Interface */
 #define CONF_UART              CONSOLE_UART
@@ -88,9 +147,18 @@ typedef struct {
 	char BUT_NUM;
 } botao;
 
-botao BUT1 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 17u, .PIO_MASK = (1u << 17u), .BUT_NUM = 'a'};
-botao BUT2 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 30u, .PIO_MASK = (1u << 30u), .BUT_NUM = 'b'};
-botao BUT3 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = 'c'};
+botao BUT3 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 28u, .PIO_MASK = (1u << 28u), .BUT_NUM = 'a'};
+botao BUT7 = {.PIO_NAME = PIOB, .PIO_ID = ID_PIOB, .PIO_IDX = 2u, .PIO_MASK = (1u << 2u), .BUT_NUM = 'b'};
+botao BUT9 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 30u, .PIO_MASK = (1u << 30u), .BUT_NUM = 'c'};
+botao BUT8 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 22u, .PIO_MASK = (1u << 22u), .BUT_NUM = 'd'};
+botao BUT11 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 21u, .PIO_MASK = (1u << 21u), .BUT_NUM = 'e'};
+botao BUT2 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 4u, .PIO_MASK = (1u << 4u), .BUT_NUM = 'f'};
+botao BUT12 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = 'g'};
+botao BUT6 = {.PIO_NAME = PIOB, .PIO_ID = ID_PIOB, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = 'h'};
+botao BUT5 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 25u, .PIO_MASK = (1u << 25u), .BUT_NUM = 'i'};
+botao BUT1 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 0u, .PIO_MASK = (1u << 0u), .BUT_NUM = 'j'};
+botao BUT10 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 17u, .PIO_MASK = (1u << 17u), .BUT_NUM = 'k'};
+botao BUT4 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 20u, .PIO_MASK = (1u << 20u), .BUT_NUM = 'l'};
 
 // Descomente o define abaixo, para desabilitar o Bluetooth e utilizar modo Serial via Cabo
 //#define DEBUG_SERIAL
@@ -111,30 +179,149 @@ static void AFEC_pot_callback(void)
 
 void but1_callback(void)
 {
-	BUT1.but_flag = true;
-	if(!pio_get(BUT1.PIO_NAME, PIO_INPUT, BUT1.PIO_MASK))
+	if(!pio_get(BUT1.PIO_NAME, PIO_INPUT, BUT1.PIO_MASK)){
+		BUT1.but_flag = true;
+		pio_set(LED1_PIO, LED1_PIO_IDX_MASK);
 		but_status = APERTADO;
-	else 
+	}else{ 
+		pio_clear(LED1_PIO, LED1_PIO_IDX_MASK);
 		but_status = LIBERADO;
+	}
 }
 
 void but2_callback(void)
 {
+	if(!pio_get(BUT2.PIO_NAME, PIO_INPUT, BUT2.PIO_MASK)){
 	BUT2.but_flag = true;
-	if(!pio_get(BUT2.PIO_NAME, PIO_INPUT, BUT2.PIO_MASK))
+	pio_set(LED2_PIO, LED2_PIO_IDX_MASK);
 	but_status = APERTADO;
-	else
+	}else{
+	pio_clear(LED2_PIO, LED2_PIO_IDX_MASK);
 	but_status = LIBERADO;
+	}
 }
 
 void but3_callback(void)
 {
+	if(!pio_get(BUT3.PIO_NAME, PIO_INPUT, BUT3.PIO_MASK)){
 	BUT3.but_flag = true;
-	if(!pio_get(BUT3.PIO_NAME, PIO_INPUT, BUT3.PIO_MASK))
+	pio_set(LED3_PIO, LED3_PIO_IDX_MASK);
 	but_status = APERTADO;
-	else
+	}else{
+	pio_clear(LED3_PIO, LED3_PIO_IDX_MASK);
 	but_status = LIBERADO;
+	}
 }
+
+void but4_callback(void)
+{
+	if(!pio_get(BUT4.PIO_NAME, PIO_INPUT, BUT4.PIO_MASK)){
+	BUT4.but_flag = true;
+	pio_set(LED4_PIO, LED4_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED4_PIO, LED4_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
+void but5_callback(void)
+{
+	if(!pio_get(BUT5.PIO_NAME, PIO_INPUT, BUT5.PIO_MASK)){
+	BUT5.but_flag = true;
+	pio_set(LED5_PIO, LED5_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED5_PIO, LED5_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
+void but6_callback(void)
+{
+	if(!pio_get(BUT6.PIO_NAME, PIO_INPUT, BUT6.PIO_MASK)){
+	BUT6.but_flag = true;
+	pio_set(LED6_PIO, LED6_PIO_IDX_MASK);
+	//but_status = APERTADO;
+	}else{
+	pio_clear(LED6_PIO, LED6_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
+
+void but7_callback(void)
+{
+	if(!pio_get(BUT7.PIO_NAME, PIO_INPUT, BUT7.PIO_MASK)){
+	BUT7.but_flag = true;
+	pio_set(LED7_PIO, LED7_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED7_PIO, LED7_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
+void but8_callback(void)
+{
+	if(!pio_get(BUT8.PIO_NAME, PIO_INPUT, BUT8.PIO_MASK)){
+	BUT8.but_flag = true;
+	pio_set(LED8_PIO, LED8_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED8_PIO, LED8_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
+void but9_callback(void)
+{
+	if(!pio_get(BUT9.PIO_NAME, PIO_INPUT, BUT9.PIO_MASK)){
+	BUT9.but_flag = true;
+	pio_set(LED9_PIO, LED9_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED9_PIO, LED9_PIO_IDX_MASK);	
+	but_status = LIBERADO;
+	}
+}
+
+void but10_callback(void)
+{
+	if(!pio_get(BUT10.PIO_NAME, PIO_INPUT, BUT10.PIO_MASK)){
+	BUT10.but_flag = true;
+	pio_set(LED10_PIO, LED10_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED10_PIO, LED10_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
+void but11_callback(void)
+{
+	if(!pio_get(BUT11.PIO_NAME, PIO_INPUT, BUT11.PIO_MASK)){
+	BUT11.but_flag = true;
+	pio_set(LED11_PIO, LED11_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED11_PIO, LED11_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
+void but12_callback(void)
+{
+	if(!pio_get(BUT12.PIO_NAME, PIO_INPUT, BUT12.PIO_MASK)){
+	BUT12.but_flag = true;
+	pio_set(LED12_PIO, LED12_PIO_IDX_MASK);
+	but_status = APERTADO;
+	}else{
+	pio_clear(LED12_PIO, LED12_PIO_IDX_MASK);
+	but_status = LIBERADO;
+	}
+}
+
 
 
 void SysTick_Handler() {
@@ -239,7 +426,7 @@ void iniciabots(botao BOT, p_handler *funcao){
 	pio_handler_set(BOT.PIO_NAME,
 	BOT.PIO_ID,
 	BOT.PIO_MASK,
-	PIO_IT_FALL_EDGE,
+	PIO_IT_EDGE,
 	funcao);
 
 	// Ativa interrupção
@@ -304,9 +491,47 @@ static void config_POT(void){
 void io_init(void)
 {
 	
+	
+		pmc_enable_periph_clk(LED1_PIO_ID);
+		pmc_enable_periph_clk(LED2_PIO_ID);
+		pmc_enable_periph_clk(LED3_PIO_ID);
+		pmc_enable_periph_clk(LED4_PIO_ID);
+		pmc_enable_periph_clk(LED5_PIO_ID);
+		pmc_enable_periph_clk(LED6_PIO_ID);
+		pmc_enable_periph_clk(LED7_PIO_ID);
+		pmc_enable_periph_clk(LED8_PIO_ID);
+		pmc_enable_periph_clk(LED9_PIO_ID);
+		pmc_enable_periph_clk(LED10_PIO_ID);
+		pmc_enable_periph_clk(LED11_PIO_ID);
+		pmc_enable_periph_clk(LED12_PIO_ID);
+		pio_configure(LED1_PIO, PIO_OUTPUT_0, LED1_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED2_PIO, PIO_OUTPUT_0, LED2_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED3_PIO, PIO_OUTPUT_0, LED3_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED4_PIO, PIO_OUTPUT_0, LED4_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED5_PIO, PIO_OUTPUT_0, LED5_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED6_PIO, PIO_OUTPUT_0, LED6_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED7_PIO, PIO_OUTPUT_0, LED7_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED8_PIO, PIO_OUTPUT_0, LED8_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED9_PIO, PIO_OUTPUT_0, LED9_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED10_PIO, PIO_OUTPUT_0, LED10_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED11_PIO, PIO_OUTPUT_0, LED11_PIO_IDX_MASK, PIO_DEFAULT);
+		pio_configure(LED12_PIO, PIO_OUTPUT_0, LED12_PIO_IDX_MASK, PIO_DEFAULT);
+
+	
+	
+
 	iniciabots(BUT1, but1_callback);
 	iniciabots(BUT2, but2_callback);
 	iniciabots(BUT3, but3_callback);
+	iniciabots(BUT4, but4_callback);
+	iniciabots(BUT5, but5_callback);
+	iniciabots(BUT6, but6_callback);	
+	iniciabots(BUT7, but7_callback);
+	iniciabots(BUT8, but8_callback);
+	iniciabots(BUT9, but9_callback);
+	iniciabots(BUT10, but10_callback);
+	iniciabots(BUT11, but11_callback);
+	iniciabots(BUT12, but12_callback);
 
 }
 
@@ -327,12 +552,12 @@ int main (void)
 	hc05_server_init();
 	#endif
 	
-	io_init();
+	
 	config_POT();
 	afec_channel_enable(AFEC0, AFEC_CHANNEL_POT_SENSOR);
 	afec_start_software_conversion(AFEC0);
 	
-	
+	io_init();
 	while(1) {	
 		
 		afec_start_software_conversion(AFEC0);
@@ -343,14 +568,50 @@ int main (void)
 			send_command(BUT1.BUT_NUM, buffer);			
 			BUT1.but_flag = false;
 		}
-		if(BUT2.but_flag) {
+		else if(BUT2.but_flag) {
 			send_command(BUT2.BUT_NUM, buffer);
 			BUT2.but_flag = false;
 		}
-		if(BUT3.but_flag) {
+		else if(BUT3.but_flag) {
 			send_command(BUT3.BUT_NUM, buffer);
 			BUT3.but_flag = false;
 		}
+		else if(BUT4.but_flag) {
+			send_command(BUT4.BUT_NUM, buffer);
+			BUT4.but_flag = false;
+			}
+		else if(BUT5.but_flag) {
+			send_command(BUT5.BUT_NUM, buffer);
+			BUT5.but_flag = false;
+		}
+		else if(BUT6.but_flag) {
+			send_command(BUT6.BUT_NUM, buffer);
+			BUT6.but_flag = false;
+		}
+		else if(BUT7.but_flag) {
+			send_command(BUT7.BUT_NUM, buffer);
+			BUT7.but_flag = false;
+		}
+		else if(BUT8.but_flag) {
+			send_command(BUT8.BUT_NUM, buffer);
+			BUT8.but_flag = false;
+		}
+		else if(BUT9.but_flag) {
+			send_command(BUT9.BUT_NUM, buffer);
+			BUT9.but_flag = false;
+		}	
+		else if(BUT10.but_flag) {
+			send_command(BUT10.BUT_NUM, buffer);
+			BUT10.but_flag = false;
+		}
+		else if(BUT11.but_flag) {
+			send_command(BUT11.BUT_NUM, buffer);
+			BUT11.but_flag = false;
+		}
+		else if(BUT12.but_flag) {
+			send_command(BUT12.BUT_NUM, buffer);
+			BUT12.but_flag = false;
+		}		
 		
 		if(usart_get_string(USART0, &bufferx, 6, 100)){
 			int n = atoi(bufferx);
@@ -379,25 +640,5 @@ int main (void)
 				}
 			}		
 		}
-		
-			
-
-			
-		
-			
-			//pio_clear(EBUT2_PIO, EBUT2_PIO_IDX_MASK);
-			//pio_set(EBUT1_PIO, EBUT1_PIO_IDX_MASK);
-			//delay_ms(1);
-			//pio_clear(EBUT2_PIO, EBUT2_PIO_IDX_MASK);
-			//pio_clear(EBUT1_PIO, EBUT1_PIO_IDX_MASK);
-			//delay_ms(1);
-			
-		
-		
-		//usart_srial_write_packet(USART0, buffer , 5);
-		
-		//delay_s(0.5);
-		//usart_write(UART_COMM, 'X');
-		
 	}
 }
