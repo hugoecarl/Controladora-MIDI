@@ -150,28 +150,33 @@ typedef void (*p_handler) (uint32_t, uint32_t);
 
 //Define e inicia struct para botoes
 
+typedef bitset<8> BYTE;
+
 typedef struct {
 	uint32_t PIO_NAME;
 	uint32_t PIO_ID;
 	uint32_t PIO_IDX;
 	uint32_t PIO_MASK;
+	BYTE data;
+	uint32_t data1;
+	uint32_t data2;
 	volatile Bool but_flag;
 	SemaphoreHandle_t xSemaphore;
 	char BUT_NUM;
 } botao;
 
-botao BUT3 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 28u, .PIO_MASK = (1u << 28u), .BUT_NUM = 'a'};
-botao BUT7 = {.PIO_NAME = PIOB, .PIO_ID = ID_PIOB, .PIO_IDX = 2u, .PIO_MASK = (1u << 2u), .BUT_NUM = 'b'};
-botao BUT9 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 30u, .PIO_MASK = (1u << 30u), .BUT_NUM = 'c'};
-botao BUT8 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 22u, .PIO_MASK = (1u << 22u), .BUT_NUM = 'd'};
-botao BUT11 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 21u, .PIO_MASK = (1u << 21u), .BUT_NUM = 'e'};
-botao BUT2 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 4u, .PIO_MASK = (1u << 4u), .BUT_NUM = 'f'};
-botao BUT12 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = 'g'};
-botao BUT6 = {.PIO_NAME = PIOB, .PIO_ID = ID_PIOB, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = 'h'};
-botao BUT5 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 25u, .PIO_MASK = (1u << 25u), .BUT_NUM = 'i'};
-botao BUT1 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 0u, .PIO_MASK = (1u << 0u), .BUT_NUM = 'j'};
-botao BUT10 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 17u, .PIO_MASK = (1u << 17u), .BUT_NUM = 'k'};
-botao BUT4 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 20u, .PIO_MASK = (1u << 20u), .BUT_NUM = 'l'};
+botao BUT3 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 28u, .PIO_MASK = (1u << 28u), .BUT_NUM = 'a', .data =0x90, .data1 = 1, .data2 = 100};
+botao BUT7 = {.PIO_NAME = PIOB, .PIO_ID = ID_PIOB, .PIO_IDX = 2u, .PIO_MASK = (1u << 2u), .BUT_NUM = 'b', .data = 0x90, .data1 = 2, .data2 = 100};
+botao BUT9 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 30u, .PIO_MASK = (1u << 30u), .BUT_NUM = 'c', .data = 0x90, .data1 = 3, .data2 = 100};
+botao BUT8 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 22u, .PIO_MASK = (1u << 22u), .BUT_NUM = 'd', .data = 0x90, .data1 = 4, .data2 = 100};
+botao BUT11 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 21u, .PIO_MASK = (1u << 21u), .BUT_NUM = 'e', .data = 0x90, .data1 = 5, .data2 = 100};
+botao BUT2 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 4u, .PIO_MASK = (1u << 4u), .BUT_NUM = 'f', .data = 0x90, .data1 = 6, .data2 = 100};
+botao BUT12 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = 'g', .data = 0x90, .data1 = 7, .data2 = 100};
+botao BUT6 = {.PIO_NAME = PIOB, .PIO_ID = ID_PIOB, .PIO_IDX = 3u, .PIO_MASK = (1u << 3u), .BUT_NUM = 'h', .data = 0x90, .data1 = 8, .data2 = 100};
+botao BUT5 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 25u, .PIO_MASK = (1u << 25u), .BUT_NUM = 'i', .data = 0x90, .data1 = 9, .data2 = 100};
+botao BUT1 = {.PIO_NAME = PIOA, .PIO_ID = ID_PIOA, .PIO_IDX = 0u, .PIO_MASK = (1u << 0u), .BUT_NUM = 'j', .data = 0x90, .data1 = 10, .data2 = 100};
+botao BUT10 = {.PIO_NAME = PIOC, .PIO_ID = ID_PIOC, .PIO_IDX = 17u, .PIO_MASK = (1u << 17u), .BUT_NUM = 'k', .data = 0x90, .data1 = 11, .data2 = 100};
+botao BUT4 = {.PIO_NAME = PIOD, .PIO_ID = ID_PIOD, .PIO_IDX = 20u, .PIO_MASK = (1u << 20u), .BUT_NUM = 'l', .data = 0x90, .data1 = 12, .data2 = 100};
 
 //botao *o[12] = {&BUT1, &BUT2, &BUT3, &BUT4, &BUT5, &BUT6, &BUT7, &BUT8, &BUT9, &BUT10, &BUT11, &BUT12};
 
@@ -492,7 +497,7 @@ static void config_POT(void){
 	/* configura call back */
 	afec_set_callback(AFEC0, AFEC_INTERRUPT_EOC_8,	AFEC_pot_callback, 5);
 
-	/*** Configuracao específica do canal AFEC ***/
+	/*** Configuracao especÃ­fica do canal AFEC ***/
 	struct afec_ch_config afec_ch_cfg;
 	afec_ch_get_config_defaults(&afec_ch_cfg);
 	afec_ch_cfg.gain = AFEC_GAINVALUE_0;
@@ -507,7 +512,7 @@ static void config_POT(void){
 
 	/***  Configura sensor de temperatura ***/
 
-	/* Selecina canal e inicializa conversão */
+	/* Selecina canal e inicializa conversÃ£o */
 	afec_channel_enable(AFEC0, AFEC_CHANNEL_POT_SENSOR);
 
 	pmc_enable_periph_clk(EBUT1_PIO_ID);
@@ -523,20 +528,20 @@ void iniciabots(botao BOT, p_handler *funcao){
 	pio_configure(BOT.PIO_NAME, PIO_INPUT, BOT.PIO_MASK, PIO_PULLUP|PIO_DEBOUNCE);
 	pio_set_debounce_filter(BOT.PIO_NAME, BOT.PIO_MASK, 60);
 
-	// Configura interrupção no pino referente ao botao e associa
-	// função de callback caso uma interrupção for gerada
-	// a função de callback é a: but_callback()
+	// Configura interrupÃ§Ã£o no pino referente ao botao e associa
+	// funÃ§Ã£o de callback caso uma interrupÃ§Ã£o for gerada
+	// a funÃ§Ã£o de callback Ã© a: but_callback()
 	pio_handler_set(BOT.PIO_NAME,
 	BOT.PIO_ID,
 	BOT.PIO_MASK,
 	PIO_IT_EDGE,
 	funcao);
 
-	// Ativa interrupção
+	// Ativa interrupÃ§Ã£o
 	pio_enable_interrupt(BOT.PIO_NAME, BOT.PIO_MASK);
 
 	// Configura NVIC para receber interrupcoes do PIO do botao
-	// com prioridade 4 (quanto mais próximo de 0 maior)
+	// com prioridade 4 (quanto mais prÃ³ximo de 0 maior)
 	NVIC_EnableIRQ(BOT.PIO_ID);
 	NVIC_SetPriority(BOT.PIO_ID, 4); // Prioridade 4
 
@@ -731,7 +736,7 @@ void task_slider(void){
 	
 	while(1){
 		if (xQueueReceive( xQueuePot, &(pot_ul_value), ( TickType_t )  1 / portTICK_PERIOD_MS)) {
-		printf("Inicio conversão \n");
+		printf("Inicio conversÃ£o \n");
 		afec_start_software_conversion(AFEC0);
 		sprintf(buffer, "%04d",pot_ul_value);
 		send_command('n', buffer);
@@ -789,40 +794,76 @@ void task_botoes(void){
 	while(1){
 		
 		if ( xSemaphoreTake(BUT1.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT1.BUT_NUM, buffer);
+			//send_command(BUT1.BUT_NUM, buffer);
+			send_command(BUT1.data, buffer);
+			send_command(BUT1.data1, buffer);
+			send_command(BUT1.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT2.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT2.BUT_NUM, buffer);
+			//send_command(BUT2.BUT_NUM, buffer);
+			send_command(BUT2.data, buffer);
+			send_command(BUT2.data1, buffer);
+			send_command(BUT2.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT3.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT3.BUT_NUM, buffer);
+			//send_command(BUT3.BUT_NUM, buffer);
+			send_command(BUT3.data, buffer);
+			send_command(BUT3.data1, buffer);
+			send_command(BUT3.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT4.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT4.BUT_NUM, buffer);
+			//send_command(BUT4.BUT_NUM, buffer);
+			send_command(BUT4.data, buffer);
+			send_command(BUT4.data1, buffer);
+			send_command(BUT4.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT5.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT5.BUT_NUM, buffer);
+			//send_command(BUT5.BUT_NUM, buffer);
+			send_command(BUT5.data, buffer);
+			send_command(BUT5.data1, buffer);
+			send_command(BUT5.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT6.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT6.BUT_NUM, buffer);
+			//send_command(BUT6.BUT_NUM, buffer);
+			send_command(BUT6.data, buffer);
+			send_command(BUT6.data1, buffer);
+			send_command(BUT6.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT7.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT7.BUT_NUM, buffer);
+			//send_command(BUT7.BUT_NUM, buffer);
+			send_command(BUT7.data, buffer);
+			send_command(BUT7.data1, buffer);
+			send_command(BUT7.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT8.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT8.BUT_NUM, buffer);
+			//send_command(BUT8.BUT_NUM, buffer);
+			send_command(BUT8.data, buffer);
+			send_command(BUT8.data1, buffer);
+			send_command(BUT8.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT9.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT9.BUT_NUM, buffer);
+			//send_command(BUT9.BUT_NUM, buffer);
+			send_command(BUT9.data, buffer);
+			send_command(BUT9.data1, buffer);
+			send_command(BUT9.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT10.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT10.BUT_NUM, buffer);
+			//send_command(BUT10.BUT_NUM, buffer);
+			send_command(BUT10.data, buffer);
+			send_command(BUT10.data1, buffer);
+			send_command(BUT10.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT11.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT11.BUT_NUM, buffer);
+			//send_command(BUT11.BUT_NUM, buffer);
+			send_command(BUT11.data, buffer);
+			send_command(BUT11.data1, buffer);
+			send_command(BUT11.data2, buffer);
 		}
 		if ( xSemaphoreTake(BUT12.xSemaphore, ( TickType_t ) 1) == pdTRUE){
-			send_command(BUT12.BUT_NUM, buffer);
+			//send_command(BUT12.BUT_NUM, buffer);
+			send_command(BUT12.data, buffer);
+			send_command(BUT12.data1, buffer);
+			send_command(BUT12.data2, buffer);
 		}
 
 	}
