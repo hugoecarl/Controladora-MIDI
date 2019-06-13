@@ -91,6 +91,12 @@
 #define LED12_PIO_IDX 27
 #define LED12_PIO_IDX_MASK (1u << LED12_PIO_IDX)
 
+#define BUZZ_PIO           PIOA                  // periferico que controla o LED
+#define BUZZ_PIO_ID        ID_PIOA                   // ID do periférico PIOC (controla LED)
+#define BUZZ_PIO_IDX      12u                    // ID do LED no PIO
+#define BUZZ_PIO_IDX_MASK  (1u << BUZZ_PIO_IDX)   // Mascara para CONTROLARMOS o LED
+
+
 /** UART Interface */
 #define CONF_UART              CONSOLE_UART
 /** Baudrate setting */
@@ -310,6 +316,23 @@ void but12_callback(void)
 	}
 }
 
+void bizz(int frequencia, int tempo_ms, int w_led){
+	int us_delay = 1000000/frequencia; //quantos microsegundos entre as notas para definir a frequencia
+	int tempo = tempo_ms * 1000; //ms -> us
+	
+	int i = 0;
+	
+	while (i<tempo/us_delay){
+		pio_set(BUZZ_PIO, BUZZ_PIO_IDX_MASK);      // Coloca 1 no pino LED
+		delay_us(us_delay/2);
+		pio_clear(BUZZ_PIO, BUZZ_PIO_IDX_MASK);    // Coloca 0 no pino do LED
+		delay_us(us_delay/2);
+		i++;
+	}
+	
+	
+	
+}
 
 
 
@@ -672,6 +695,7 @@ void io_init(void){
 	pmc_enable_periph_clk(LED10_PIO_ID);
 	pmc_enable_periph_clk(LED11_PIO_ID);
 	pmc_enable_periph_clk(LED12_PIO_ID);
+        pmc_enable_periph_clk(BUZZ_PIO_ID)
 	pio_configure(LED1_PIO, PIO_OUTPUT_0, LED1_PIO_IDX_MASK, PIO_DEFAULT);
 	pio_configure(LED2_PIO, PIO_OUTPUT_0, LED2_PIO_IDX_MASK, PIO_DEFAULT);
 	pio_configure(LED3_PIO, PIO_OUTPUT_0, LED3_PIO_IDX_MASK, PIO_DEFAULT);
@@ -684,6 +708,8 @@ void io_init(void){
 	pio_configure(LED10_PIO, PIO_OUTPUT_0, LED10_PIO_IDX_MASK, PIO_DEFAULT);
 	pio_configure(LED11_PIO, PIO_OUTPUT_0, LED11_PIO_IDX_MASK, PIO_DEFAULT);
 	pio_configure(LED12_PIO, PIO_OUTPUT_0, LED12_PIO_IDX_MASK, PIO_DEFAULT);
+
+        pio_configure(BUZZ_PIO, PIO_OUTPUT_0, BUZZ_PIO_IDX_MASK, PIO_DEFAULT);
 
 
 	
@@ -864,6 +890,7 @@ void task_botoes(void){
 			send_command(BUT12.data, buffer);
 			send_command(BUT12.data1, buffer);
 			send_command(BUT12.data2, buffer);
+
 		}
 
 	}
