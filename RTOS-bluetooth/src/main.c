@@ -96,6 +96,11 @@
 #define BUZZ_PIO_IDX      12u                    // ID do LED no PIO
 #define BUZZ_PIO_IDX_MASK  (1u << BUZZ_PIO_IDX)   // Mascara para CONTROLARMOS o LED
 
+#define BUZZ2_PIO           PIOA                  // periferico que controla o LED
+#define BUZZ2_PIO_ID        ID_PIOA                   // ID do periférico PIOC (controla LED)
+#define BUZZ2_PIO_IDX      18u                    // ID do LED no PIO
+#define BUZZ2_PIO_IDX_MASK  (1u << BUZZ_PIO_IDX)   // Mascara para CONTROLARMOS o LED
+
 
 /** UART Interface */
 #define CONF_UART              CONSOLE_UART
@@ -710,7 +715,7 @@ void io_init(void){
 	pio_configure(LED12_PIO, PIO_OUTPUT_0, LED12_PIO_IDX_MASK, PIO_DEFAULT);
 
         pio_configure(BUZZ_PIO, PIO_OUTPUT_0, BUZZ_PIO_IDX_MASK, PIO_DEFAULT);
-
+	pio_configure(BUZZ2_PIO, PIO_OUTPUT_0, BUZZ2_PIO_IDX_MASK, PIO_DEFAULT);
 
 	
 	
@@ -825,6 +830,7 @@ void task_botoes(void){
 			send_command(BUT1.data1, buffer);
 			send_command(BUT1.data2, buffer);
 			bizz(1, 1000,0);
+			bizz(1, 5000,0);
 		}
 		if ( xSemaphoreTake(BUT2.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT2.BUT_NUM, buffer);
@@ -832,6 +838,7 @@ void task_botoes(void){
 			send_command(BUT2.data1, buffer);
 			send_command(BUT2.data2, buffer);
 			bizz(1, 1200,0);
+			bizz(1, 5200,0);
 		}
 		if ( xSemaphoreTake(BUT3.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT3.BUT_NUM, buffer);
@@ -839,6 +846,7 @@ void task_botoes(void){
 			send_command(BUT3.data1, buffer);
 			send_command(BUT3.data2, buffer);
 			bizz(1, 1400,0);
+			bizz(1, 5500,0);
 		}
 		if ( xSemaphoreTake(BUT4.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT4.BUT_NUM, buffer);
@@ -846,6 +854,7 @@ void task_botoes(void){
 			send_command(BUT4.data1, buffer);
 			send_command(BUT4.data2, buffer);
 			bizz(1, 1600,0);
+			bizz(1, 5700,0);
 		}
 		if ( xSemaphoreTake(BUT5.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT5.BUT_NUM, buffer);
@@ -853,6 +862,7 @@ void task_botoes(void){
 			send_command(BUT5.data1, buffer);
 			send_command(BUT5.data2, buffer);
 			bizz(1, 1700,0);
+			bizz(1, 5900,0);
 		}
 		if ( xSemaphoreTake(BUT6.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT6.BUT_NUM, buffer);
@@ -860,6 +870,7 @@ void task_botoes(void){
 			send_command(BUT6.data1, buffer);
 			send_command(BUT6.data2, buffer);
 			bizz(1, 1900,0);
+			bizz(1, 6200,0);
 		}
 		if ( xSemaphoreTake(BUT7.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT7.BUT_NUM, buffer);
@@ -867,6 +878,7 @@ void task_botoes(void){
 			send_command(BUT7.data1, buffer);
 			send_command(BUT7.data2, buffer);
 			bizz(1, 2100,0);
+			bizz(1, 6500,0);
 		}
 		if ( xSemaphoreTake(BUT8.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT8.BUT_NUM, buffer);
@@ -874,6 +886,7 @@ void task_botoes(void){
 			send_command(BUT8.data1, buffer);
 			send_command(BUT8.data2, buffer);
 			bizz(1, 2400,0);
+			bizz(1, 6700,0);
 		}
 		if ( xSemaphoreTake(BUT9.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT9.BUT_NUM, buffer);
@@ -881,6 +894,7 @@ void task_botoes(void){
 			send_command(BUT9.data1, buffer);
 			send_command(BUT9.data2, buffer);
 			bizz(1, 2600,0);
+			bizz(1, 6900,0);
 		}
 		if ( xSemaphoreTake(BUT10.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT10.BUT_NUM, buffer);
@@ -888,6 +902,7 @@ void task_botoes(void){
 			send_command(BUT10.data1, buffer);
 			send_command(BUT10.data2, buffer);
 			bizz(1, 2800,0);
+			bizz(1, 7200,0);
 		}
 		if ( xSemaphoreTake(BUT11.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT11.BUT_NUM, buffer);
@@ -895,6 +910,7 @@ void task_botoes(void){
 			send_command(BUT11.data1, buffer);
 			send_command(BUT11.data2, buffer);
 			bizz(1, 3400,0);
+			bizz(1, 7600,0);
 		}
 		if ( xSemaphoreTake(BUT12.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT12.BUT_NUM, buffer);
@@ -902,6 +918,7 @@ void task_botoes(void){
 			send_command(BUT12.data1, buffer);
 			send_command(BUT12.data2, buffer);
 			bizz(1, 4000,0);
+			bizz(1, 7900,0);
 
 		}
 
