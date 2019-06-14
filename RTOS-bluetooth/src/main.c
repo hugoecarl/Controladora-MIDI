@@ -824,72 +824,84 @@ void task_botoes(void){
 			send_command(BUT1.data, buffer);
 			send_command(BUT1.data1, buffer);
 			send_command(BUT1.data2, buffer);
+			bizz(1, 1000,0);
 		}
 		if ( xSemaphoreTake(BUT2.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT2.BUT_NUM, buffer);
 			send_command(BUT2.data, buffer);
 			send_command(BUT2.data1, buffer);
 			send_command(BUT2.data2, buffer);
+			bizz(1, 1200,0);
 		}
 		if ( xSemaphoreTake(BUT3.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT3.BUT_NUM, buffer);
 			send_command(BUT3.data, buffer);
 			send_command(BUT3.data1, buffer);
 			send_command(BUT3.data2, buffer);
+			bizz(1, 1400,0);
 		}
 		if ( xSemaphoreTake(BUT4.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT4.BUT_NUM, buffer);
 			send_command(BUT4.data, buffer);
 			send_command(BUT4.data1, buffer);
 			send_command(BUT4.data2, buffer);
+			bizz(1, 1600,0);
 		}
 		if ( xSemaphoreTake(BUT5.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT5.BUT_NUM, buffer);
 			send_command(BUT5.data, buffer);
 			send_command(BUT5.data1, buffer);
 			send_command(BUT5.data2, buffer);
+			bizz(1, 1700,0);
 		}
 		if ( xSemaphoreTake(BUT6.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT6.BUT_NUM, buffer);
 			send_command(BUT6.data, buffer);
 			send_command(BUT6.data1, buffer);
 			send_command(BUT6.data2, buffer);
+			bizz(1, 1900,0);
 		}
 		if ( xSemaphoreTake(BUT7.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT7.BUT_NUM, buffer);
 			send_command(BUT7.data, buffer);
 			send_command(BUT7.data1, buffer);
 			send_command(BUT7.data2, buffer);
+			bizz(1, 2100,0);
 		}
 		if ( xSemaphoreTake(BUT8.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT8.BUT_NUM, buffer);
 			send_command(BUT8.data, buffer);
 			send_command(BUT8.data1, buffer);
 			send_command(BUT8.data2, buffer);
+			bizz(1, 2400,0);
 		}
 		if ( xSemaphoreTake(BUT9.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT9.BUT_NUM, buffer);
 			send_command(BUT9.data, buffer);
 			send_command(BUT9.data1, buffer);
 			send_command(BUT9.data2, buffer);
+			bizz(1, 2600,0);
 		}
 		if ( xSemaphoreTake(BUT10.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT10.BUT_NUM, buffer);
 			send_command(BUT10.data, buffer);
 			send_command(BUT10.data1, buffer);
 			send_command(BUT10.data2, buffer);
+			bizz(1, 2800,0);
 		}
 		if ( xSemaphoreTake(BUT11.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT11.BUT_NUM, buffer);
 			send_command(BUT11.data, buffer);
 			send_command(BUT11.data1, buffer);
 			send_command(BUT11.data2, buffer);
+			bizz(1, 3400,0);
 		}
 		if ( xSemaphoreTake(BUT12.xSemaphore, ( TickType_t ) 1) == pdTRUE){
 			//send_command(BUT12.BUT_NUM, buffer);
 			send_command(BUT12.data, buffer);
 			send_command(BUT12.data1, buffer);
 			send_command(BUT12.data2, buffer);
+			bizz(1, 4000,0);
 
 		}
 
