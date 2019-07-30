@@ -10,7 +10,8 @@ Controladora de samplers instrumentais utilizando a placa Atmel SAME70 com comun
     - Buzzer pra speaker
     - MIDI 
     
-    ![alt text](https://github.com/hugoecarl/Controladora-MIDI/blob/master/img.jpeg)
+    
+![alt text](https://github.com/hugoecarl/Controladora-MIDI/blob/master/img.jpeg)
     
     
    
